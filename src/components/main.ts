@@ -1,4 +1,4 @@
-export const MAIN = () => {
+export const Main = () => {
     const main = document.createElement('main');
     main.innerHTML = 'This but a main element';
 
