@@ -1,8 +1,17 @@
-import _ from 'lodash';
+import * as _ from 'lodash';
 import './style.css';
-import printMe from './print.js';
+import printMe from './print';
 
-function component() {
+const someDiv = () => {
+    return `
+    <div>
+        <h1>This is h1</h1>
+        <span>This is, but a span</span>
+    </div>`;
+};
+
+
+function start() {
     const element = document.createElement('div');
     const btn = document.createElement('button');
 
@@ -14,9 +23,10 @@ function component() {
     btn.onclick = printMe;
 
     element.appendChild(btn);
+    element.innerHTML += someDiv();
 
 
     return element;
 }
 
-document.body.appendChild(component());
+document.body.appendChild(start());
