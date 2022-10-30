@@ -31,7 +31,6 @@ ul {
     --greyeen: #727D71;
 }
 
-
 /* ---------------- MAIN STYLES ---------------- */
 
 main {
@@ -45,10 +44,15 @@ main article {
     width: 75%;
 }
 
+main article section:first-child {
+    display: flex;
+    flex-flow: wrap;
+    justify-content: space-around;
+}
+
 main aside {
     width: 25%;
 }
-
 
 /* ---------------- HEADER STYLES ---------------- */
 
@@ -100,4 +104,22 @@ footer {
 
 footer h3 {
     color: var(--cream);
+}
+
+/* ---------------- COFFEE CARD STYLES ---------------- */
+
+.coffee-card {
+    width: 45%;
+    display: flex;
+    border: solid 1px green;
+    margin: 1rem;
+}
+
+.coffee-card section {
+    max-width: 60%;
+}
+
+.coffee-card img {
+    max-width: 40%;
+    max-height: 50%;
 }
