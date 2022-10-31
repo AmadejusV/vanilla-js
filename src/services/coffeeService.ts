@@ -1,8 +1,3 @@
-// const baseURL = 'https://api.sampleapis.com/coffee/hot';
-// fetch(baseURL)
-//   .then(resp => resp.json())
-//   .then(data => displayData(data));
-
 
 export const getData = async (url: string) => {
     const response = await fetch(url);
@@ -11,5 +6,4 @@ export const getData = async (url: string) => {
 
     const data = await response.json();
     return data;
-
 };
