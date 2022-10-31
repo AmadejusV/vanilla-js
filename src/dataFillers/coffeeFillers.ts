@@ -9,7 +9,7 @@ export const fillCoffeeData = async () => {
     mainArticle.textContent = 'Loading...';
 
     const data: ICoffeeItem[] = await getData('https://api.sampleapis.com/coffee/hot');
-    const filtered = data.filter(item => item.image && item.title !== 'string');
+    const filtered = data.filter(item => item.image && item.image.includes('https'));
 
     console.log('filteredItems', filtered);
 
