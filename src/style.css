@@ -35,25 +35,25 @@ ul {
 
 main {
     display: flex;
-    height: 100%;
+    min-height: calc(100vh - 3rem);
     position: relative;
     padding-top: 3rem;
     margin-bottom: 3rem;
 }
 
-main article {
-    width: 75%;
+.main-article {
+    width: max(75%, calc(100vw - 13rem));
 }
 
 main article section:first-child {
     margin-top: 1rem;
     display: flex;
     flex-flow: wrap;
-    justify-content: space-around;
+    justify-content: space-evenly;
 }
 
 main aside {
-    width: 25%;
+    width: min(25%, 13rem);
 }
 
 /* ---------------- ASSIDE COFFEE STYLES ---------------- */
@@ -143,12 +143,18 @@ footer h3 {
 /* ---------------- COFFEE CARD STYLES ---------------- */
 
 .coffee-card {
-    width: 45%;
-    max-height: 13rem;
+    width: max(22rem, 45%);
+    height: 13.1rem;
     display: flex;
     border: solid 1px green;
-    margin: 1rem;
+    margin: 1rem 0;
     overflow: hidden;
+}
+
+@media only screen and (max-width: 1040px) {
+  .coffee-card {
+    width: 90%;
+  }
 }
 
 .coffee-card section {
@@ -158,6 +164,11 @@ footer h3 {
 
 .coffee-card section h3 {
     margin-bottom: 0.5rem;
+    font-size: clamp(1.2rem, 1.5vw, 1.4rem);
+}
+
+.coffee-card section p {
+    font-size: clamp(.9rem, 1.5vw, 1.05rem);
 }
 
 .coffee-card img {

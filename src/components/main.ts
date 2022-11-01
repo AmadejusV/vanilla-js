@@ -9,8 +9,6 @@ export const Main = () => {
     article.setAttribute('id', 'main-article')
     aside.classList.add('main-aside');
     
-    article.textContent = 'this the article';
-    
     main.appendChild(article);
     main.appendChild(document.createElement('hr'));
     main.appendChild(aside);
