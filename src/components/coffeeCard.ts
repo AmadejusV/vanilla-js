@@ -1,4 +1,5 @@
 import { ICoffeeItem } from "../models/coffee";
+import { CoffeeProduct } from "../models/product";
 
 export const CoffeeCard = (coffeeItem: ICoffeeItem) => {
     const article = document.createElement('article');
@@ -9,10 +10,20 @@ export const CoffeeCard = (coffeeItem: ICoffeeItem) => {
 
     article.classList.add('coffee-card');
 
-    img.src = coffeeItem.image;
-    img.alt = coffeeItem.title;
-    title.textContent = coffeeItem.title;
-    p.textContent = coffeeItem.description;
+    const coffeeWithInfo = CoffeeProduct(
+        coffeeItem.title, 
+        coffeeItem.id, 
+        coffeeItem.image,
+        coffeeItem.description, 
+        coffeeItem.ingredients
+    );
+
+    img.src = coffeeWithInfo.image;
+    img.alt = coffeeWithInfo.title;
+    title.textContent = coffeeWithInfo.title;
+    p.textContent = coffeeWithInfo.description;
+
+    article.addEventListener('click', () => coffeeWithInfo.logCoffee());
 
     article.appendChild(img);
     textSection.appendChild(title);
