@@ -10,4 +10,5 @@ export interface ICoffeeItem {
 export interface ICoffeeItemWithInfo extends ICoffeeItem {
     log: () => void;
     logCoffee: () => void;
+    prototypicallyInherited: () => void;
 }

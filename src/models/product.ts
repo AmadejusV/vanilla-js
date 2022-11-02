@@ -33,6 +33,10 @@ export const Product = (productName: string, productId?: string | number) => {
     );
 };
 
+Product.prototype.__proto__.prototypicallyInherited = function() {
+    console.log(`Prototypically inherited: Hey this is ${this.title}`);
+}
+
 export const CoffeeProduct = (productName: string, productId?: string | number, image?: string, description?: string, ingredients?: string[]) => {
     const state = {
         ...Product(productName, productId),

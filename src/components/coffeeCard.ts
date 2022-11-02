@@ -23,7 +23,10 @@ export const CoffeeCard = (coffeeItem: ICoffeeItem) => {
     title.textContent = coffeeWithInfo.title;
     p.textContent = coffeeWithInfo.description;
 
-    article.addEventListener('click', () => coffeeWithInfo.logCoffee());
+    article.addEventListener('click', () => {
+        coffeeWithInfo.logCoffee();
+        coffeeWithInfo.prototypicallyInherited();
+    });
 
     article.appendChild(img);
     textSection.appendChild(title);
