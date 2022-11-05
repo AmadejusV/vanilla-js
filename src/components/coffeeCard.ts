@@ -24,6 +24,7 @@ export const CoffeeCard = (coffeeItem: ICoffeeItem) => {
     p.textContent = coffeeWithInfo.description;
 
     article.addEventListener('click', () => {
+        // logging compositionally added functions one thru assigning a new method to the prototype itself
         coffeeWithInfo.logCoffee();
         coffeeWithInfo.prototypicallyInherited();
     });

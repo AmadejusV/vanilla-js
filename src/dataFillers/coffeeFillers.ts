@@ -31,15 +31,11 @@ export const fillChuckJokeData = async () => {
     chuckJoke.textContent = 'Loading...';
 
     const data: IChuckJoke = await getData('https://api.chucknorris.io/jokes/random');
-    console.log(data);
 
     if (!data.value) {
         chuckJoke.textContent = 'Sorry error occured, try again :('; 
         return;
     } else {
         chuckJoke.textContent = data.value;
-
-        const btn = document.getElementById('joke-button');
-        if (btn) btn.textContent = 'Get another joke'; 
     };
 };

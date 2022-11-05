@@ -10,7 +10,10 @@ export const ChuckJokeArticle = () => {
 
     button.id = 'joke-button';
     button.type = 'button';
-    button.onclick = () => fillChuckJokeData();
+    button.onclick = () => {
+        fillChuckJokeData();
+        changeButtonTextAfter1stClick();
+    };
     
     button.textContent = 'Get a joke';
     articleTitle.textContent = 'Enjoy a Chuck Norris joke!';
@@ -20,3 +23,20 @@ export const ChuckJokeArticle = () => {
 
     return article;
 };
+
+const changeBtnText = () => {
+    let timesClicked = 0;
+
+    return () => {
+        if(timesClicked !== 0) return;
+        
+        const btn = document.getElementById('joke-button');
+        if (btn) {
+            timesClicked++;
+            btn.textContent = 'Get another joke';
+            console.log('Closure - timesClicked: ', timesClicked);
+        }; 
+    };
+};
+
+const changeButtonTextAfter1stClick = changeBtnText();

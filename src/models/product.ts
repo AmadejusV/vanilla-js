@@ -1,6 +1,7 @@
 import { ICoffeeItemWithInfo } from "./coffee";
 
 // compositional functionalities for Object types:
+// when using composition instead of inheritance we avoid types having unnecessary properties and methods
 
 interface IProduct {
     id: string | number;
@@ -33,9 +34,10 @@ export const Product = (productName: string, productId?: string | number) => {
     );
 };
 
+// Add a function to prototype
 Product.prototype.__proto__.prototypicallyInherited = function() {
     console.log(`Prototypically inherited: Hey this is ${this.title}`);
-}
+};
 
 export const CoffeeProduct = (productName: string, productId?: string | number, image?: string, description?: string, ingredients?: string[]) => {
     const state = {
