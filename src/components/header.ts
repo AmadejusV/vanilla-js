@@ -1,19 +1,23 @@
+import { route } from "../router";
 import { INavItem } from "./nav";
 import { Nav } from "./nav";
 
-
 const headerNavItems: INavItem[] = [
-    { title: 'Link 1', href: 'link1'},
-    { title: 'Link 2', href: 'link2'},
-    { title: 'Link 3', href: 'link3'},
-    { title: 'Link 4', href: 'link4'},
+  { title: "Home", href: "/", onClick: route },
+  { title: "Form", href: "/form", onClick: route },
+  {
+    title: "Not found test",
+    href: "/404",
+    onClick: route,
+  },
+  { title: "Link 4", href: "link4", onClick: route },
 ];
 
 export const Header = () => {
-    const header = document.createElement('header');
-    header.classList.add('header');
+  const header = document.createElement("header");
+  header.classList.add("header");
 
-    header.appendChild(Nav(headerNavItems, 'header-nav'));
+  header.appendChild(Nav(headerNavItems, "header-nav"));
 
-    return header;
+  return header;
 };

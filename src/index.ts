@@ -1,15 +1,15 @@
-import './style.css';
-
-import { Header } from './components/header';
-import { Main as Main } from './components/main';
-import { Footer as Footer } from './components/footer';
-import { fillCoffeeData } from './dataFillers/coffeeFillers';
+import "./style.css";
+import { Header } from "./components/header";
+import { Footer as Footer } from "./components/footer";
+import { fillCoffeeData } from "./dataFillers/coffeeFillers";
+import { initRouter, Router } from "./router";
 
 const start = () => {
-    document.body.appendChild(Header());
-    document.body.appendChild(Main());
-    document.body.appendChild(Footer());
+  document.body.appendChild(Header());
+  document.body.appendChild(Router());
+  document.body.appendChild(Footer());
 };
 
 start();
+initRouter();
 fillCoffeeData();
