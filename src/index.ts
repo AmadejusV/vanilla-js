@@ -1,7 +1,6 @@
 import "./style.css";
 import { Header } from "./components/header";
 import { Footer as Footer } from "./components/footer";
-import { fillCoffeeData } from "./dataFillers/coffeeFillers";
 import { initRouter, Router } from "./router";
 
 const start = () => {
@@ -12,4 +11,3 @@ const start = () => {
 
 start();
 initRouter();
-fillCoffeeData();

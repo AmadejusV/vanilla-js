@@ -1,4 +1,5 @@
 import { AsideCoffee } from "../components/asideCoffee";
+import { fillCoffeeData } from "../dataFillers/coffeeFillers";
 
 export const Home = () => {
   const main = document.createElement("main");
@@ -13,5 +14,6 @@ export const Home = () => {
   main.appendChild(document.createElement("hr"));
   main.appendChild(aside);
 
+  fillCoffeeData();
   return main;
 };
