@@ -1,4 +1,11 @@
+import { Input } from "../components/form/input";
+
 export const FormExercise = () => {
+  const formValidation: IFormValidation = {
+    nameValid: false,
+    numberValid: false,
+  };
+
   const main = document.createElement("main");
   const article = document.createElement("article");
 
@@ -7,76 +14,76 @@ export const FormExercise = () => {
   article.innerHTML = `This is the form page`;
 
   main.appendChild(article);
-  article.appendChild(
+
+  const form = document.createElement("form");
+  form.method = "post";
+  article.appendChild(form);
+
+  form.appendChild(
     Input("text", "Name", "Enter your name", (value) => {
-      return value.length > 0
-        ? { isValid: true }
-        : { isValid: false, message: "Name is required" };
+      const isValid = nameIsValid(value);
+      formValidation.nameValid = isValid;
+      validateForm(formValidation, "submit-button");
+      return isValid ? { isValid } : { isValid, message: "Name is required" };
     })
   );
 
-  article.appendChild(
+  form.appendChild(
     Input("number", "Phone", "Enter your phone", (value) => {
-      return value.length > 6
-        ? { isValid: true }
-        : { isValid: false, message: "Phone is required" };
+      const { isValid, message } = numberIsValid(value);
+      formValidation.numberValid = isValid;
+      validateForm(formValidation, "submit-button");
+      return isValid ? { isValid } : { isValid, message: message };
     })
   );
+
+  const submitButton = document.createElement("button");
+  submitButton.id = "submit-button";
+  submitButton.type = "submit";
+  submitButton.innerText = "Submit";
+  submitButton.disabled = true;
+  submitButton.addEventListener("click", (event) => {
+    event.preventDefault();
+    const name = document.querySelector("input[name='Name']") as HTMLInputElement;
+    const phone = document.querySelector("input[name='Phone']") as HTMLInputElement;
+
+    console.log(name.value, phone.value);
+  });
+
+  form.appendChild(submitButton);
 
   return main;
 };
 
-export const Input = (
-  inputType: string,
-  label: string,
-  placeholder?: string,
-  validator?: (value: string) => { isValid: boolean; message?: string }
-) => {
-  //fix structure
-  const inputContainer = document.createElement("div");
+interface IFormValidation {
+  nameValid: boolean;
+  numberValid: boolean;
+}
 
-  if (label) {
-    const inputLabel = document.createElement("label");
-    inputLabel.innerText = label;
-    inputLabel.setAttribute("for", label);
-    inputContainer.appendChild(inputLabel);
+const validateForm = (formValidation: IFormValidation, elementId: string) => {
+  const submitButton = document.getElementById(elementId) as HTMLButtonElement;
+
+  for (const key in formValidation) {
+    if (!formValidation[key as keyof IFormValidation]) {
+      submitButton.disabled = true;
+      return true;
+    }
   }
-
-  const input = document.createElement("input");
-  input.setAttribute("id", label);
-  input.setAttribute("name", label);
-  input.setAttribute("type", inputType);
-  inputContainer.appendChild(input);
-
-  if (placeholder) {
-    input.setAttribute("placeholder", placeholder);
-  }
-
-  if (validator) {
-    // try to make a dynamic validation message? Make the validator return an object with the message and the boolean?
-    input.addEventListener("input", (event) => {
-      const { isValid, message } = validator(
-        (event.target as HTMLInputElement).value
-      );
-
-      //simplify, avoid valid value removing all validation texts, by referring to correct validation text for removal
-      //avoid repeating validation text creation when value is consistently invalid during input
-      if (message && !isValid) {
-        const validationText = document.createElement("small");
-        validationText.id = "validationText";
-        validationText.style.color = "red";
-        validationText.innerText = message;
-        inputContainer.appendChild(validationText);
-      } else {
-        const validationText = document.getElementById("validationText");
-        if (validationText) {
-          validationText.remove();
-        }
-      }
-
-      input.style.borderColor = isValid ? "green" : "red";
-    });
-  }
-
-  return inputContainer;
+  submitButton.disabled = false;
+  return false;
 };
+
+const nameIsValid = (value: string) => {
+  return value.length > 0;
+};
+
+const numberIsValid = (value: string) => {
+  if (value.length === 10) {
+    return { isValid: true };
+  }
+  if (value.length === 0) {
+    return { isValid: false, message: "Phone is required" };
+  }
+  return { isValid: false, message: "Phone should be 10 characters long" };
+};
+//TODO: REFACTOR to reduce complexity and increase readability
