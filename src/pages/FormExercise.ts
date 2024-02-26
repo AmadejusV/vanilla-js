@@ -1,6 +1,7 @@
 import { Input } from "../components/form/input";
 import { SubmitButton } from "../components/form/submitButton";
 import { MainArticle } from "../components/mainArticle";
+import { showNotification } from "../components/notification";
 import { emailIsValid, nameIsValid, numberIsValid, validateForm } from "../models/formValidation";
 
 export const FormExercise = () => {
@@ -38,7 +39,7 @@ export const FormExercise = () => {
   );
 
   form.appendChild(
-    Input("number", "Phone", "Enter your phone", (value) => {
+    Input("phone", "Phone", "Enter your phone", (value) => {
       const { isValid, message } = numberIsValid(value);
       formValidation.numberValid = isValid;
       validateForm(formValidation, "submit-button");
@@ -54,6 +55,7 @@ export const FormExercise = () => {
       const email = document.querySelector("input[name='Email']") as HTMLInputElement;
 
       console.log(name.value, email.value, phone.value);
+      showNotification("Form submitted successfully");
     })
   );
 

@@ -21,13 +21,13 @@ export const nameIsValid = (value: string) => {
 };
 
 export const numberIsValid = (value: string) => {
-  if (value.length === 10) {
+  if (value.length === 9) {
     return { isValid: true };
   }
   if (value.length === 0) {
     return { isValid: false, message: "Phone is required" };
   }
-  return { isValid: false, message: "Phone should be 10 characters long" };
+  return { isValid: false, message: "Phone should be 9 characters long" };
 };
 
 const EMAIL_REGEX =

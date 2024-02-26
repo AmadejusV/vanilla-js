@@ -242,3 +242,24 @@ footer h3 {
 .error-message-spaceholder {
   margin-bottom: 1.2rem;
 }
+
+/* ---------------- NOTIFICATION STYLES ---------------- */
+
+.notification-popup {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  background-color: #444;
+  color: white;
+  padding: 20px;
+  border-radius: 5px;
+  z-index: 1000;
+  transition: transform 0.3s ease-out, opacity 0.3s ease-out;
+  transform: translateX(100%);
+  opacity: 0;
+}
+
+.notification-popup.show {
+  transform: translateX(0);
+  opacity: 1;
+}
