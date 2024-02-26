@@ -29,3 +29,16 @@ export const numberIsValid = (value: string) => {
   }
   return { isValid: false, message: "Phone should be 10 characters long" };
 };
+
+const EMAIL_REGEX =
+  /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+
+export const emailIsValid = (email: string) => {
+  if (email.length === 0) {
+    return { isValid: false, message: "Email is required" };
+  }
+
+  return EMAIL_REGEX.test(String(email).toLowerCase())
+    ? { isValid: true }
+    : { isValid: false, message: "Please enter a valid email address" };
+};

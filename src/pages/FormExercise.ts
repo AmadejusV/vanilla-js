@@ -1,12 +1,13 @@
 import { Input } from "../components/form/input";
 import { SubmitButton } from "../components/form/submitButton";
 import { MainArticle } from "../components/mainArticle";
-import { nameIsValid, numberIsValid, validateForm } from "../models/formValidation";
+import { emailIsValid, nameIsValid, numberIsValid, validateForm } from "../models/formValidation";
 
 export const FormExercise = () => {
   const formValidation = {
     nameValid: false,
     numberValid: false,
+    emailValid: false,
   };
 
   const main = document.createElement("main");
@@ -28,6 +29,15 @@ export const FormExercise = () => {
   );
 
   form.appendChild(
+    Input("email", "Email", "Enter your email address", (value) => {
+      const { isValid, message } = emailIsValid(value);
+      formValidation.emailValid = isValid;
+      validateForm(formValidation, "submit-button");
+      return isValid ? { isValid } : { isValid, message: message };
+    })
+  );
+
+  form.appendChild(
     Input("number", "Phone", "Enter your phone", (value) => {
       const { isValid, message } = numberIsValid(value);
       formValidation.numberValid = isValid;
@@ -41,8 +51,9 @@ export const FormExercise = () => {
       event.preventDefault();
       const name = document.querySelector("input[name='Name']") as HTMLInputElement;
       const phone = document.querySelector("input[name='Phone']") as HTMLInputElement;
+      const email = document.querySelector("input[name='Email']") as HTMLInputElement;
 
-      console.log(name.value, phone.value);
+      console.log(name.value, email.value, phone.value);
     })
   );
 
