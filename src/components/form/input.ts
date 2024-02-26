@@ -5,9 +5,11 @@ export const Input = (
   validator?: (value: string) => { isValid: boolean; message?: string }
 ) => {
   const inputContainer = document.createElement("div");
+  inputContainer.classList.add("input-field-container");
 
   if (label) {
     const inputLabel = document.createElement("label");
+    inputLabel.classList.add("input-label");
     inputLabel.innerText = label;
     inputLabel.htmlFor = label;
     inputContainer.appendChild(inputLabel);
@@ -15,6 +17,7 @@ export const Input = (
 
   const input = document.createElement("input");
   input.id = label;
+  input.classList.add("input-field", "error-message-spaceholder");
   input.name = label;
   input.type = inputType;
   inputContainer.appendChild(input);
@@ -39,21 +42,23 @@ export const Input = (
         if (message && !isValid) {
           let validationText = document.querySelector(`small[data-for='${input.id}']`) as HTMLElement;
           if (!validationText) {
+            input.classList.remove("error-message-spaceholder");
             validationText = document.createElement("small");
             validationText.dataset.for = input.id;
-            validationText.style.color = "red";
+            validationText.classList.add("input-validation-message");
             inputContainer.appendChild(validationText);
           }
           validationText.innerText = message;
         } else {
           const validationText = document.querySelector(`small[data-for='${input.id}']`) as HTMLElement;
           if (validationText) {
+            input.classList.add("error-message-spaceholder");
             validationText.remove();
           }
         }
 
         input.style.borderColor = isValid ? "green" : "red";
-      }, 500); // 500ms delay
+      }, 500);
     });
   }
 

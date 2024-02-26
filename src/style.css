@@ -176,3 +176,64 @@ footer h3 {
   height: 13rem;
   object-fit: cover;
 }
+
+/* ---------------- FORM EXERCISE STYLES ---------------- */
+
+.form-exercise {
+  width: 20rem;
+}
+
+.form-article {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.submit-button {
+  margin-top: 0.5rem;
+  padding: 0.5rem 1rem;
+  background-color: var(--brown);
+  color: var(--cream);
+  border: none;
+  border-radius: 0.5rem;
+  width: 100%;
+}
+.submit-button:hover {
+  cursor: pointer;
+  background-color: var(--light-brown);
+}
+
+.submit-button:disabled {
+  cursor: not-allowed;
+  background-color: var(--greyeen);
+}
+
+/* ---------------- INPUT STYLES ---------------- */
+
+.input-field-container {
+  display: flex;
+  flex-flow: column;
+}
+
+.input-label {
+  margin: 0.1rem 0;
+}
+
+.input-field {
+  border-radius: 0.5rem;
+  height: 2rem;
+  padding: 0.5rem;
+  border-style: solid;
+}
+
+.input-validation-message {
+  height: 1rem;
+  color: red;
+  font-size: 0.8rem;
+  margin: 0.2rem 0;
+}
+
+.error-message-spaceholder {
+  margin-bottom: 1.4rem;
+}

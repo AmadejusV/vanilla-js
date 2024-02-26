@@ -1,21 +1,20 @@
 import { Input } from "../components/form/input";
+import { SubmitButton } from "../components/form/submitButton";
+import { MainArticle } from "../components/mainArticle";
+import { nameIsValid, numberIsValid, validateForm } from "../models/formValidation";
 
 export const FormExercise = () => {
-  const formValidation: IFormValidation = {
+  const formValidation = {
     nameValid: false,
     numberValid: false,
   };
 
   const main = document.createElement("main");
-  const article = document.createElement("article");
-
-  article.classList.add("main-article");
-  article.setAttribute("id", "main-article");
-  article.innerHTML = `This is the form page`;
-
+  const article = MainArticle("form-article");
   main.appendChild(article);
 
   const form = document.createElement("form");
+  form.classList.add("form-exercise");
   form.method = "post";
   article.appendChild(form);
 
@@ -37,53 +36,15 @@ export const FormExercise = () => {
     })
   );
 
-  const submitButton = document.createElement("button");
-  submitButton.id = "submit-button";
-  submitButton.type = "submit";
-  submitButton.innerText = "Submit";
-  submitButton.disabled = true;
-  submitButton.addEventListener("click", (event) => {
-    event.preventDefault();
-    const name = document.querySelector("input[name='Name']") as HTMLInputElement;
-    const phone = document.querySelector("input[name='Phone']") as HTMLInputElement;
+  form.appendChild(
+    SubmitButton((event) => {
+      event.preventDefault();
+      const name = document.querySelector("input[name='Name']") as HTMLInputElement;
+      const phone = document.querySelector("input[name='Phone']") as HTMLInputElement;
 
-    console.log(name.value, phone.value);
-  });
-
-  form.appendChild(submitButton);
+      console.log(name.value, phone.value);
+    })
+  );
 
   return main;
 };
-
-interface IFormValidation {
-  nameValid: boolean;
-  numberValid: boolean;
-}
-
-const validateForm = (formValidation: IFormValidation, elementId: string) => {
-  const submitButton = document.getElementById(elementId) as HTMLButtonElement;
-
-  for (const key in formValidation) {
-    if (!formValidation[key as keyof IFormValidation]) {
-      submitButton.disabled = true;
-      return true;
-    }
-  }
-  submitButton.disabled = false;
-  return false;
-};
-
-const nameIsValid = (value: string) => {
-  return value.length > 0;
-};
-
-const numberIsValid = (value: string) => {
-  if (value.length === 10) {
-    return { isValid: true };
-  }
-  if (value.length === 0) {
-    return { isValid: false, message: "Phone is required" };
-  }
-  return { isValid: false, message: "Phone should be 10 characters long" };
-};
-//TODO: REFACTOR to reduce complexity and increase readability
