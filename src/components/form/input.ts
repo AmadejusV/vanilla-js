@@ -1,3 +1,6 @@
+import { ErrorMessage } from "./errorMessage";
+import { InputLabel } from "./label";
+
 export const Input = (
   inputType: string,
   label: string,
@@ -8,18 +11,14 @@ export const Input = (
   inputContainer.classList.add("input-field-container");
 
   if (label) {
-    const inputLabel = document.createElement("label");
-    inputLabel.classList.add("input-label");
-    inputLabel.innerText = label;
-    inputLabel.htmlFor = label;
-    inputContainer.appendChild(inputLabel);
+    inputContainer.appendChild(InputLabel(label));
   }
 
   const input = document.createElement("input");
   input.id = label;
-  input.classList.add("input-field", "error-message-spaceholder");
   input.name = label;
   input.type = inputType;
+  input.classList.add("input-field", "error-message-spaceholder");
   inputContainer.appendChild(input);
 
   if (placeholder) {
@@ -43,9 +42,7 @@ export const Input = (
           let validationText = document.querySelector(`small[data-for='${input.id}']`) as HTMLElement;
           if (!validationText) {
             input.classList.remove("error-message-spaceholder");
-            validationText = document.createElement("small");
-            validationText.dataset.for = input.id;
-            validationText.classList.add("input-validation-message");
+            validationText = ErrorMessage(input.id);
             inputContainer.appendChild(validationText);
           }
           validationText.innerText = message;
