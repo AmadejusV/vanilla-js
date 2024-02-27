@@ -13,7 +13,7 @@ export const Nav = (navContent: INavItem[], className: string) => {
     const li = document.createElement("li");
     const link = document.createElement("a");
     li.appendChild(link);
-    link.innerHTML = item.title;
+    link.innerText = item.title;
     link.href = item.href;
     if (item.onClick) link.onclick = item.onClick;
 
