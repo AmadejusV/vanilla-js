@@ -1,3 +1,4 @@
+import { debounce } from 'lodash';
 import { ErrorMessage } from "./errorMessage";
 import { InputLabel } from "./label";
 
@@ -26,16 +27,7 @@ export const Input = (
   }
 
   if (validator) {
-    let timeoutId: number | null = null;
-
-    input.addEventListener("input", (event) => {
-      // Clear the previous timeout if it exists
-      if (timeoutId !== null) {
-        clearTimeout(timeoutId);
-      }
-
-      // Set a new timeout
-      timeoutId = window.setTimeout(() => {
+    input.addEventListener("input", debounce((event) => {
         const { isValid, message } = validator((event.target as HTMLInputElement).value);
 
         if (message && !isValid) {
@@ -55,8 +47,7 @@ export const Input = (
         }
 
         input.style.borderColor = isValid ? "green" : "red";
-      }, 500);
-    });
+    }, 500));
   }
 
   return inputContainer;
