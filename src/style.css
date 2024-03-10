@@ -176,3 +176,90 @@ footer h3 {
   height: 13rem;
   object-fit: cover;
 }
+
+/* ---------------- FORM EXERCISE STYLES ---------------- */
+
+.form-exercise {
+  height: fit-content;
+  background-color: var(--cream);
+  padding: 2rem;
+  border-radius: 1rem;
+  margin-top: 3rem;
+  width: 25rem;
+}
+
+.form-article {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.submit-button {
+  margin-top: 2rem;
+  padding: 0.5rem 1rem;
+  background-color: var(--brown);
+  color: white;
+  border: none;
+  border-radius: 0.5rem;
+  width: 100%;
+}
+
+.submit-button:not(:disabled):hover {
+  cursor: pointer;
+  background-color: var(--light-brown);
+}
+
+.submit-button:disabled {
+  cursor: not-allowed;
+  background-color: var(--greyeen);
+}
+
+/* ---------------- INPUT STYLES ---------------- */
+
+.input-field-container {
+  display: flex;
+  flex-flow: column;
+}
+
+.input-label {
+  margin: 0.1rem 0;
+}
+
+.input-field {
+  border-radius: 0.5rem;
+  height: 2rem;
+  padding: 0.5rem;
+  border-style: solid;
+}
+
+.input-validation-message {
+  height: 1rem;
+  color: red;
+  font-size: 0.8rem;
+  margin-top: 0.2rem;
+}
+
+.error-message-spaceholder {
+  margin-bottom: 1.2rem;
+}
+
+/* ---------------- NOTIFICATION STYLES ---------------- */
+
+.notification-popup {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  background-color: #444;
+  color: white;
+  padding: 20px;
+  border-radius: 5px;
+  z-index: 1000;
+  transition: transform 0.3s ease-out, opacity 0.3s ease-out;
+  transform: translateX(100%);
+  opacity: 0;
+}
+
+.notification-popup.show {
+  transform: translateX(0);
+  opacity: 1;
+}

@@ -1,16 +1,16 @@
+import { fillCoffeeData } from "./dataFillers/coffeeFillers";
 import { FormExercise } from "./pages/FormExercise";
 import { Home } from "./pages/Home";
 import { PageNotFound } from "./pages/PageNotFound";
 
 type Routes = {
-  [key: string]: HTMLElement;
+  [key: string]: () => HTMLElement;
 };
 
 const routes: Routes = {
-  "404": PageNotFound(),
-  "/": Home(),
-  "/form": FormExercise(),
-  //   "/form": "/pages/form.html",
+  "404": PageNotFound,
+  "/": Home,
+  "/form": FormExercise,
 };
 
 export const route = (eventParam: any) => {
@@ -22,11 +22,17 @@ export const route = (eventParam: any) => {
 
 export const handleLocation = async () => {
   const path = window.location.pathname;
-  const elementByRoute = routes[path] || routes["404"];
+  const pageComponent = routes[path] || routes["404"];
+  const elementByRoute = pageComponent();
 
   const mainElement = document.getElementById("my-router");
   if (mainElement) {
     mainElement.replaceChildren(elementByRoute);
+  }
+
+  //Fill data when on home page
+  if (path === "/") {
+    fillCoffeeData();
   }
 };
 
